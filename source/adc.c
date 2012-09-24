@@ -26,16 +26,17 @@ uint8_t sensors[7];
 
 
 // initialize the sensor array
+// заполнение массива датчиков
 void initSensors(void) {
   uint8_t i;
-
   for (i=0; i<ADC_CHANNELS; i++)
     sensors[i] = readADC(i);
 }
 
 
 void startADC(void) {
-  // initilize mux, and set startbit
+  // initialize mux, and set startbit
+  // инициализация мультиплексора и установка стартовых битов
 
   adc_sel = 0;
   ADMUX = _BV(REFS0) |_BV(ADLAR) | (adc_sel & 0x07);
@@ -56,7 +57,9 @@ void stopADC(void) {
 
 
 /* poll adc until conversion is done */
+/* опрос АЦП и окончание процесса перобразования */
 /* used initially for getting the barometric pressure */
+/* Первоначально использовался для получения атмосферного давления*/
 uint8_t readADC(uint8_t channel) {
 
   /* init adc */
